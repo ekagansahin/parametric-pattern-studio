@@ -1,0 +1,155 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Parametric Pattern Studio</title>
+  <style>
+    :root {
+      --bg: #14161a;
+      --panel: #1e2128;
+      --text: #e8eaed;
+      --muted: #9aa0a6;
+      --accent: #4f8ef7;
+    }
+    * { box-sizing: border-box; }
+    html, body { margin: 0; height: 100%; background: var(--bg); color: var(--text);
+      font-family: system-ui, -apple-system, "Segoe UI", sans-serif; overflow: hidden; }
+    #viewport { position: fixed; inset: 0; }
+    #topbar {
+      position: fixed; top: 0; left: 0; right: 0; display: flex; align-items: center;
+      gap: 12px; padding: 10px 14px; pointer-events: none; z-index: 40;
+    }
+    #topbar > * { pointer-events: auto; }
+    #topbar h1 { font-size: 15px; font-weight: 600; margin: 0 8px 0 0; color: var(--text); }
+    button.btn {
+      background: var(--panel); color: var(--text); border: 1px solid #333a45;
+      border-radius: 8px; padding: 7px 14px; font-size: 13px; cursor: pointer;
+    }
+    button.btn:hover { border-color: var(--accent); }
+    button.btn.primary { background: var(--accent); border-color: var(--accent); color: #fff; }
+    #demoWrap { position: relative; }
+    #demoMenu {
+      position: absolute; top: calc(100% + 4px); left: 0; min-width: 170px;
+      background: var(--panel); border: 1px solid #333a45; border-radius: 8px;
+      padding: 4px; z-index: 30; display: none; flex-direction: column; gap: 2px;
+    }
+    #demoMenu.open { display: flex; }
+    #demoMenu button {
+      background: none; border: 0; color: var(--text); text-align: left;
+      padding: 7px 10px; font-size: 13px; border-radius: 6px; cursor: pointer;
+    }
+    #demoMenu button:hover { background: rgba(79,142,247,.18); }
+    #panels {
+      position: fixed; top: 50px; right: 10px; z-index: 10;
+      display: flex; gap: 8px; align-items: flex-start; flex-wrap: wrap;
+      justify-content: flex-end; max-width: calc(100vw - 20px);
+      max-height: calc(100vh - 100px); overflow-y: auto;
+    }
+    #panels .lil-gui.root { --width: 215px; position: static; }
+    #credit {
+      position: fixed; right: 14px; bottom: 40px; z-index: 10; font-size: 11px;
+      color: var(--muted); background: rgba(30,33,40,.85); border: 1px solid #333a45;
+      border-radius: 8px; padding: 5px 10px; display: none;
+    }
+    #library {
+      position: fixed; top: 50px; left: 14px; z-index: 35; width: 360px;
+      max-width: calc(100vw - 28px); max-height: calc(100vh - 100px);
+      background: var(--panel); border: 1px solid #333a45; border-radius: 10px;
+      display: none; flex-direction: column; overflow: hidden;
+    }
+    #library.open { display: flex; }
+    #libHead {
+      display: flex; align-items: center; gap: 8px; padding: 10px 12px;
+      border-bottom: 1px solid #333a45; font-size: 13px;
+    }
+    #libHead .title { font-weight: 600; }
+    #libHead .summary { color: var(--muted); font-size: 11.5px; margin-right: auto; }
+    #libList { overflow-y: auto; padding: 6px; }
+    .lib-item {
+      display: flex; flex-direction: column; gap: 4px; padding: 8px 10px;
+      border-radius: 8px; font-size: 12.5px;
+    }
+    .lib-item:hover { background: rgba(79,142,247,.08); }
+    .lib-item .meta { color: var(--muted); font-size: 11px; }
+    .lib-item .row { display: flex; gap: 6px; align-items: center; }
+    .lib-item .name { overflow: hidden; text-overflow: ellipsis; white-space: nowrap; }
+    .lib-item .kind {
+      font-size: 10.5px; color: var(--accent); border: 1px solid var(--accent);
+      border-radius: 999px; padding: 1px 7px; flex-shrink: 0;
+    }
+    button.mini {
+      background: none; border: 1px solid #333a45; color: var(--text);
+      border-radius: 6px; padding: 3px 9px; font-size: 11.5px; cursor: pointer;
+    }
+    button.mini:hover { border-color: var(--accent); }
+    button.mini.danger:hover { border-color: #e06c60; color: #e06c60; }
+    #libEmpty { padding: 18px 14px; color: var(--muted); font-size: 12.5px; }
+    #status {
+      position: fixed; left: 0; right: 0; bottom: 0; padding: 8px 14px;
+      font-size: 12.5px; color: var(--muted); background: rgba(20,22,26,.85); z-index: 10;
+      display: flex; align-items: center; gap: 8px;
+    }
+    #status.busy::before {
+      content: ""; width: 12px; height: 12px; border-radius: 50%;
+      border: 2px solid var(--accent); border-top-color: transparent;
+      animation: spin .8s linear infinite; display: inline-block;
+    }
+    @keyframes spin { to { transform: rotate(360deg); } }
+    #stats {
+      position: fixed; left: 14px; bottom: 40px; z-index: 10; font-size: 12px;
+      color: var(--muted); background: rgba(30,33,40,.85); border: 1px solid #333a45;
+      border-radius: 8px; padding: 8px 12px; white-space: pre-line; display: none;
+    }
+    #dropzone {
+      position: fixed; inset: 0; display: none; align-items: center; justify-content: center;
+      background: rgba(79,142,247,.12); border: 3px dashed var(--accent); z-index: 20;
+      font-size: 20px; color: var(--accent); pointer-events: none;
+    }
+    #hint {
+      position: fixed; inset: 0; display: flex; flex-direction: column; align-items: center;
+      justify-content: center; z-index: 5; color: var(--muted); gap: 6px; pointer-events: none;
+    }
+    #hint .big { font-size: 18px; color: var(--text); }
+  </style>
+</head>
+<body>
+  <div id="viewport"></div>
+
+  <div id="topbar">
+    <h1 id="appTitle">Parametric Pattern Studio</h1>
+    <button class="btn primary" id="btnFile">Load STL</button>
+    <div id="demoWrap">
+      <button class="btn" id="btnDemo">Sample Model ▾</button>
+      <div id="demoMenu"></div>
+    </div>
+    <button class="btn" id="btnLibrary">Library</button>
+    <button class="btn" id="btnLang">TR</button>
+    <input type="file" id="file" accept=".stl" hidden />
+  </div>
+
+  <div id="panels"></div>
+  <div id="credit"></div>
+
+  <div id="library">
+    <div id="libHead">
+      <span class="title"></span>
+      <span class="summary"></span>
+      <button class="mini danger" id="libClear"></button>
+      <button class="mini" id="libClose">✕</button>
+    </div>
+    <div id="libList"></div>
+  </div>
+
+  <div id="hint">
+    <div class="big" id="hintBig">Drag an STL file here</div>
+    <div id="hintSmall">or use the "Load STL" / "Sample Model" buttons</div>
+  </div>
+
+  <div id="stats"></div>
+  <div id="status">Ready</div>
+  <div id="dropzone">Drop the STL file</div>
+
+  <script type="module" src="./src/main.js"></script>
+</body>
+</html>

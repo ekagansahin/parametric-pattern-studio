@@ -1,0 +1,21 @@
+{
+  "name": "parametric-pattern-studio",
+  "private": true,
+  "version": "0.1.0",
+  "type": "module",
+  "scripts": {
+    "dev": "vite",
+    "build": "vite build",
+    "preview": "vite preview",
+    "test": "node tests/run-tests.mjs"
+  },
+  "dependencies": {
+    "lil-gui": "^0.19.2",
+    "manifold-3d": "^3.0.0",
+    "meshoptimizer": "^0.24.0",
+    "three": "^0.166.1"
+  },
+  "devDependencies": {
+    "vite": "^5.4.0"
+  }
+}

@@ -1,0 +1,265 @@
+// TR/EN interface text. The worker/pipeline send CODEs, not text —
+// the translation happens here, so switching languages updates everything instantly.
+
+export const STRINGS = {
+  tr: {
+    title: 'Parametrik Desen Stüdyosu',
+    loadStl: 'STL Yükle',
+    demo: 'Örnek Model',
+    hintBig: 'Bir STL dosyasını buraya sürükle',
+    hintSmall: 'veya "STL Yükle" / "Örnek Model" butonunu kullan',
+    dropHere: 'STL dosyasını bırak',
+    ready: 'Hazır',
+    langBtn: 'EN',
+    guiTitle: 'İç Doldurma (Desen)',
+    generalFolder: 'Genel',
+    sampleNames: {
+      knot: 'Düğüm', bunny: 'Stanford Bunny', benchy: '3DBenchy', dragon: 'Stanford Ejderha'
+    },
+    sampleCredits: {
+      bunny: 'Stanford Bunny — Stanford 3D Tarama Deposu',
+      benchy: '#3DBenchy — © CreativeTools.se (CC BY-ND 4.0, değiştirilmemiş)',
+      dragon: 'Stanford Ejderha — Stanford 3D Tarama Deposu'
+    },
+    pattern: 'Desen',
+    cell: 'Hücre boyutu (mm)',
+    wall: 'Duvar kalınlığı (mm)',
+    shell: 'Kabuk kalınlığı (mm)',
+    resolution: 'Çözünürlük',
+    apply: '▶ Deseni Uygula',
+    lowFolder: 'Low-Poly / Küçültme',
+    ratio: 'Üçgen oranı (%)',
+    lowTarget: 'Hedef üçgen sayısı',
+    simplify: '▶ Sadeleştir',
+    flat: 'Düz yüzey görünümü',
+    reset: 'Orijinali Göster',
+    useResult: 'Sonucu Girdi Yap',
+    download: '⬇ STL İndir',
+    clip: 'Görünür kesit (%)',
+    resOptions: { draft: 'Taslak', normal: 'Normal', high: 'Yüksek' },
+    patternNames: { gyroid: 'Gyroid', schwarzP: 'Schwarz P', voronoi: 'Voronoi (köpük)' },
+    texFolder: 'Yüzey Dokusu',
+    texture: 'Doku',
+    texScale: 'Ölçek (mm)',
+    texDepth: 'Derinlik (mm)',
+    texSubdiv: 'Otomatik yoğunlaştır',
+    texApply: '▶ Dokuyu Uygula',
+    texNames: {
+      noise: 'Gürültü (organik)',
+      wave: 'Dalga',
+      hex: 'Altıgen (petek)',
+      rd_spots: 'RD — Benek',
+      rd_maze: 'RD — Labirent',
+      rd_coral: 'RD — Mercan'
+    },
+    shellFolder: 'Kabuk Delme',
+    shellVariant: 'Desen',
+    shellVariantNames: { voronoiShell: 'Voronoi kabuk', delaunay: 'Delaunay tel kafes' },
+    holeSize: 'Delik boyutu (mm)',
+    strut: 'Çubuk kalınlığı (mm)',
+    shellThickness: 'Kabuk kalınlığı (mm)',
+    shellApply: '▶ Kabuğu Del',
+    library: 'Kütüphane',
+    libSummary: (n, size) => `${n} öğe · ${size}`,
+    libEmpty: 'Kütüphane boş — bir STL indirdiğinde sonuç ve orijinali burada saklanır (yalnızca bu cihazda).',
+    libDownload: 'İndir',
+    libLoad: 'Yükle',
+    libDelete: 'Sil',
+    libClear: 'Tümünü temizle',
+    libClearConfirm: 'Kütüphanedeki tüm modeller silinsin mi?',
+    libKindOriginal: 'orijinal',
+    progress: {
+      engine: 'Geometri motoru yükleniyor…',
+      preparing: 'Model hazırlanıyor…',
+      generating: (name) => `${name} deseni üretiliyor…`,
+      sampling: 'Yüzey noktaları örnekleniyor…',
+      boolean: 'Boolean işlemleri yapılıyor…',
+      extracting: 'Sonuç çıkarılıyor…',
+      simplifying: 'Sadeleştiriliyor…',
+      subdividing: 'Mesh yoğunlaştırılıyor…',
+      texturing: 'Doku hesaplanıyor…',
+      rdsim: 'Reaction-diffusion simülasyonu çalışıyor…',
+      checking: 'Sonuç denetleniyor…',
+      queued: 'İş kuyruğa alındı…',
+      reading: (name) => `${name} okunuyor…`
+    },
+    status: {
+      loaded: (name) => `Yüklendi: ${name} — parametreleri ayarlayıp "Deseni Uygula"ya bas.`,
+      applied: (n) => `Desen uygulandı (${n} üçgen). "STL İndir" ile kaydedebilirsin.`,
+      simplified: (n) => `Sadeleştirildi (${n} üçgen). "STL İndir" ile kaydedebilirsin.`,
+      textured: (n) => `Doku uygulandı (${n} üçgen). "STL İndir" ile kaydedebilirsin.`,
+      shelled: (n) => `Kabuk delindi (${n} üçgen). "STL İndir" ile kaydedebilirsin.`,
+      downloaded: (name) => `İndirildi: ${name}`,
+      librarySaved: '(kütüphaneye kaydedildi)',
+      showingOriginal: 'Orijinal model gösteriliyor.',
+      resultAsInput: 'Sonuç yeni girdi modeli oldu — üzerine desen uygulayabilirsin.',
+      noModel: 'Önce bir STL yükle.',
+      noResult: 'Girdi yapılacak bir sonuç yok.',
+      noDownload: 'İndirilecek model yok — önce STL yükle.',
+      notStl: 'Lütfen bir .stl dosyası bırakın.',
+      draftNote: ' Not: Taslak çözünürlükte üretildi — baskı öncesi "Yüksek" ile yeniden uygulamanı öneririm.',
+      warnPrefix: 'Uyarı: ',
+      errPrefix: 'Hata: '
+    },
+    warn: {
+      auto_res: 'Model/çözünürlük oranı çok yüksekti; çözünürlük otomatik düşürüldü.',
+      no_shell: 'Kabuk oluşturulamadı (model kabuk kalınlığı için çok ince olabilir) — desen kabuksuz uygulandı.',
+      simplify_not_manifold: 'Sadeleştirilmiş model manifold olmayabilir — oranı biraz yükseltmeyi deneyin.',
+      rd_flat: 'Doku deseni oluşmadı — ölçeği veya doku tipini değiştirmeyi deneyin.'
+    },
+    errors: {
+      not_manifold: 'Model manifold değil (delik/ters yüzey içeriyor olabilir). PrusaSlicer veya bir STL onarım aracıyla onarıp tekrar deneyin.',
+      empty_result: 'Sonuç boş çıktı — parametreleri (hücre boyutu/duvar kalınlığı) kontrol edin.',
+      few_seeds: 'Yeterli yüzey noktası örneklenemedi — delik boyutu model için çok büyük.',
+      sample_fetch: 'Örnek model yüklenemedi — bağlantınızı kontrol edip tekrar deneyin.',
+      lib_unavailable: 'Kütüphane kullanılamıyor — tarayıcı depolaması kapalı olabilir (gizli sekme?).',
+      unknown_pattern: 'Bilinmeyen desen.',
+      file_small: 'Dosya çok küçük — geçerli bir STL değil.',
+      bad_format: 'STL biçimi tanınamadı.',
+      ascii_fail: 'ASCII STL çözümlenemedi.'
+    },
+    stats: {
+      tri: 'Üçgen',
+      size: 'Boyut',
+      volume: 'Hacim',
+      fill: 'Doluluk',
+      printable: '✓ Baskıya uygun (manifold)',
+      notPrintable: '⚠ Manifold değil — baskıda sorun çıkabilir'
+    }
+  },
+  en: {
+    title: 'Parametric Pattern Studio',
+    loadStl: 'Load STL',
+    demo: 'Sample Model',
+    hintBig: 'Drag an STL file here',
+    hintSmall: 'or use the "Load STL" / "Sample Model" buttons',
+    dropHere: 'Drop the STL file',
+    ready: 'Ready',
+    langBtn: 'TR',
+    guiTitle: 'Infill (Pattern)',
+    generalFolder: 'General',
+    sampleNames: {
+      knot: 'Knot', bunny: 'Stanford Bunny', benchy: '3DBenchy', dragon: 'Stanford Dragon'
+    },
+    sampleCredits: {
+      bunny: 'Stanford Bunny — Stanford 3D Scanning Repository',
+      benchy: '#3DBenchy — © CreativeTools.se (CC BY-ND 4.0, unmodified)',
+      dragon: 'Stanford Dragon — Stanford 3D Scanning Repository'
+    },
+    pattern: 'Pattern',
+    cell: 'Cell size (mm)',
+    wall: 'Wall thickness (mm)',
+    shell: 'Skin thickness (mm)',
+    resolution: 'Resolution',
+    apply: '▶ Apply Pattern',
+    lowFolder: 'Low-Poly / Decimate',
+    ratio: 'Triangle ratio (%)',
+    lowTarget: 'Target triangle count',
+    simplify: '▶ Simplify',
+    flat: 'Flat shading',
+    reset: 'Show Original',
+    useResult: 'Use Result as Input',
+    download: '⬇ Download STL',
+    clip: 'Visible section (%)',
+    resOptions: { draft: 'Draft', normal: 'Normal', high: 'High' },
+    patternNames: { gyroid: 'Gyroid', schwarzP: 'Schwarz P', voronoi: 'Voronoi (foam)' },
+    texFolder: 'Surface Texture',
+    texture: 'Texture',
+    texScale: 'Scale (mm)',
+    texDepth: 'Depth (mm)',
+    texSubdiv: 'Auto-densify mesh',
+    texApply: '▶ Apply Texture',
+    texNames: {
+      noise: 'Noise (organic)',
+      wave: 'Wave',
+      hex: 'Hexagon (honeycomb)',
+      rd_spots: 'RD — Spots',
+      rd_maze: 'RD — Maze',
+      rd_coral: 'RD — Coral'
+    },
+    shellFolder: 'Shell Perforation',
+    shellVariant: 'Pattern',
+    shellVariantNames: { voronoiShell: 'Voronoi shell', delaunay: 'Delaunay wireframe' },
+    holeSize: 'Hole size (mm)',
+    strut: 'Strut thickness (mm)',
+    shellThickness: 'Shell thickness (mm)',
+    shellApply: '▶ Perforate Shell',
+    library: 'Library',
+    libSummary: (n, size) => `${n} items · ${size}`,
+    libEmpty: 'Library is empty — when you download an STL, the result and its original are stored here (on this device only).',
+    libDownload: 'Download',
+    libLoad: 'Load',
+    libDelete: 'Delete',
+    libClear: 'Clear all',
+    libClearConfirm: 'Delete all models in the library?',
+    libKindOriginal: 'original',
+    progress: {
+      engine: 'Loading geometry engine…',
+      preparing: 'Preparing model…',
+      generating: (name) => `Generating ${name} pattern…`,
+      sampling: 'Sampling surface points…',
+      boolean: 'Running boolean operations…',
+      extracting: 'Extracting result…',
+      simplifying: 'Simplifying…',
+      subdividing: 'Densifying mesh…',
+      texturing: 'Computing texture…',
+      rdsim: 'Running reaction-diffusion simulation…',
+      checking: 'Validating result…',
+      queued: 'Job queued…',
+      reading: (name) => `Reading ${name}…`
+    },
+    status: {
+      loaded: (name) => `Loaded: ${name} — set parameters and press "Apply Pattern".`,
+      applied: (n) => `Pattern applied (${n} triangles). Save it with "Download STL".`,
+      simplified: (n) => `Simplified (${n} triangles). Save it with "Download STL".`,
+      textured: (n) => `Texture applied (${n} triangles). Save it with "Download STL".`,
+      shelled: (n) => `Shell perforated (${n} triangles). Save it with "Download STL".`,
+      downloaded: (name) => `Downloaded: ${name}`,
+      librarySaved: '(saved to library)',
+      showingOriginal: 'Showing the original model.',
+      resultAsInput: 'Result is now the input model — you can apply a pattern on top.',
+      noModel: 'Load an STL first.',
+      noResult: 'No result to use as input.',
+      noDownload: 'Nothing to download — load an STL first.',
+      notStl: 'Please drop an .stl file.',
+      draftNote: ' Note: generated at Draft resolution — re-apply with "High" before printing.',
+      warnPrefix: 'Warning: ',
+      errPrefix: 'Error: '
+    },
+    warn: {
+      auto_res: 'Model/resolution ratio was too high; resolution was reduced automatically.',
+      no_shell: 'Skin could not be created (model may be too thin for this skin thickness) — pattern applied without a skin.',
+      simplify_not_manifold: 'Simplified model may not be manifold — try a slightly higher ratio.',
+      rd_flat: 'No texture pattern emerged — try a different scale or texture type.'
+    },
+    errors: {
+      not_manifold: 'Model is not manifold (may contain holes/flipped faces). Repair it with PrusaSlicer or an STL repair tool and try again.',
+      empty_result: 'Result was empty — check the parameters (cell size / wall thickness).',
+      few_seeds: 'Could not sample enough surface points — hole size is too large for this model.',
+      sample_fetch: 'Could not load the sample model — check your connection and try again.',
+      lib_unavailable: 'Library is unavailable — browser storage may be disabled (private tab?).',
+      unknown_pattern: 'Unknown pattern.',
+      file_small: 'File is too small — not a valid STL.',
+      bad_format: 'Unrecognized STL format.',
+      ascii_fail: 'Could not parse ASCII STL.'
+    },
+    stats: {
+      tri: 'Triangles',
+      size: 'Size',
+      volume: 'Volume',
+      fill: 'Fill',
+      printable: '✓ Print-ready (manifold)',
+      notPrintable: '⚠ Not manifold — may cause print issues'
+    }
+  }
+};
+
+const KEY = 'pds-lang';
+
+export function getLang() {
+  try { return localStorage.getItem(KEY) || 'en'; } catch { return 'en'; }
+}
+
+export function setLang(lang) {
+  try { localStorage.setItem(KEY, lang); } catch { /* ignore */ }
+}

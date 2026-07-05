@@ -1,0 +1,14 @@
+# Dependencies and build output
+node_modules/
+dist/
+
+# OS / tooling artifacts
+.DS_Store
+vite.config.js.timestamp-*.mjs
+*.log
+
+# Original download at repo root (copy lives at public/models/benchy.stl)
+/Benchy.stl
+
+# Local roadmap notes, not tracked in the repo
+/YOL_HARITASI.md
