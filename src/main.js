@@ -10,6 +10,11 @@ import {
 import { STRINGS, getLang, setLang } from './i18n.js';
 
 let lang = getLang();
+
+/** Number/date locale that matches the UI language (not the browser's). */
+const uiLocale = () => (lang === 'tr' ? 'tr-TR' : 'en-US');
+/** Percent in the UI language's convention: "%53" in Turkish, "53%" in English. */
+const fmtPercent = (v) => (lang === 'tr' ? `%${v}` : `${v}%`);
 let L = STRINGS[lang];
 
 const viewer = new Viewer(document.getElementById('viewport'));
@@ -48,11 +53,11 @@ function showStats() {
     .map((v) => v.toFixed(1)).join(' × ');
   const vol = src.volume ?? Math.abs(signedVolume(src.vertProperties, src.triVerts));
   let text =
-    `${L.stats.tri}: ${(src.triVerts.length / 3).toLocaleString()}\n` +
+    `${L.stats.tri}: ${(src.triVerts.length / 3).toLocaleString(uiLocale())}\n` +
     `${L.stats.size}: ${dims} mm\n` +
     `${L.stats.volume}: ${(vol / 1000).toFixed(1)} cm³`;
   if (result && result.originalVolume) {
-    text += `\n${L.stats.fill}: %${((vol / result.originalVolume) * 100).toFixed(0)}`;
+    text += `\n${L.stats.fill}: ${fmtPercent(((vol / result.originalVolume) * 100).toFixed(0))}`;
   }
   if (src.manifoldOK !== undefined) {
     text += `\n${src.manifoldOK ? L.stats.printable : L.stats.notPrintable}`;
@@ -217,7 +222,7 @@ worker.onmessage = (e) => {
     showCurrent();
     const warn = e.data.warning
       ? ` — ${L.status.warnPrefix}${L.warn[e.data.warning] || e.data.warning}` : '';
-    const nTri = e.data.triangles.toLocaleString();
+    const nTri = e.data.triangles.toLocaleString(uiLocale());
     const base = e.data.mode === 'simplify' ? L.status.simplified(nTri)
       : e.data.mode === 'texture' ? L.status.textured(nTri)
       : e.data.mode === 'shell' ? L.status.shelled(nTri)
@@ -444,7 +449,7 @@ async function renderLibrary() {
     libListEl.innerHTML = `<div id="libEmpty">${L.libEmpty}</div>`;
     return;
   }
-  const locale = lang === 'tr' ? 'tr-TR' : 'en-US';
+  const locale = uiLocale();
   for (const it of items) {
     const div = document.createElement('div');
     div.className = 'lib-item';

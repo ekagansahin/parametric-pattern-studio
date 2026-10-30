@@ -11,4 +11,4 @@ vite.config.js.timestamp-*.mjs
 /Benchy.stl
 
 # Local roadmap notes, not tracked in the repo
-/YOL_HARITASI.md
+/ROADMAP.md

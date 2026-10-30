@@ -1,6 +1,6 @@
 MIT License
 
-Copyright (c) 2026 Kagan Sahin
+Copyright (c) 2026 Eyup Kağan Şahin
 
 Permission is hereby granted, free of charge, to any person obtaining a copy
 of this software and associated documentation files (the "Software"), to deal
@@ -19,14 +19,3 @@ AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
 LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
 OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
 SOFTWARE.
-
----
-
-Additional note — sample model files (public/models/):
-
-- bunny.stl, dragon.stl: derived from Stanford 3D Scanning Repository data
-  (Stanford Computer Graphics Laboratory). This scan data may be used freely
-  with attribution; it is NOT covered by the MIT license.
-- benchy.stl: #3DBenchy © CreativeTools.se — distributed UNMODIFIED under the
-  CC BY-ND 4.0 license. https://www.3dbenchy.com
-  This file is NOT covered by the MIT license.

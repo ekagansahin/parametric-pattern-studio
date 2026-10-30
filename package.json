@@ -1,7 +1,15 @@
 {
   "name": "parametric-pattern-studio",
   "private": true,
-  "version": "0.1.0",
+  "version": "1.0.0",
+  "description": "Browser-based studio for 3D-printable patterns: gyroid/TPMS infill, Voronoi shell perforation, surface textures and low-poly decimation for STL files.",
+  "author": "Eyup Kağan Şahin",
+  "license": "MIT",
+  "homepage": "https://ekagansahin.github.io/parametric-pattern-studio/",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/ekagansahin/parametric-pattern-studio.git"
+  },
   "type": "module",
   "scripts": {
     "dev": "vite",
